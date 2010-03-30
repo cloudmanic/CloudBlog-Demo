@@ -10,7 +10,7 @@
 |	'' = no login required, 'basic' = unsecure login, 'digest' = more secure login
 |
 */
-$config['rest_auth'] = '';
+$config['rest_auth'] = 'basic';
  
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ $config['rest_auth'] = '';
 |	E.g: My Secret REST API
 |
 */
-$config['rest_realm'] = 'MyCloudCrm API';
+$config['rest_realm'] = 'CloudBlog API';
   
 /*
 |--------------------------------------------------------------------------

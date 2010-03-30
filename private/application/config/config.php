@@ -11,7 +11,21 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://example.com/";
+if($_SERVER['HTTP_HOST'] != 'localhost:8888') {
+	$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+	
+	//if(! isset($_SERVER['HTTPS'])) {
+	//	$url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	//	header("location: $url");
+	//}
+	
+	//$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
+	//#config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+} else {
+	$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -366,7 +380,7 @@ $config["migrations_path"] = APPPATH . "migrations/";
 | $this->migrate->version($this->config->item('migrations_version'));
 |
 */
-$config["migrations_version"] = 0;
+$config["migrations_version"] = 1;
 
 
 /* End of file config.php */

@@ -201,46 +201,21 @@ class REST_Controller extends Controller {
     // SECURITY FUNCTIONS ---------------------------------------------------------
     
     private function _checkLogin($username = '', $password = NULL)
-    {
-    	//
-			// Special hack to get exercises. 
-			//
-			if($_SERVER['PATH_INFO'] == '/api/exercises/format/serialize')
-				return TRUE;
-			if(empty($username))
-			{
-				return FALSE;
-			}
-		
+    {		
 	 		//
 	 		// Make a db query and get the usernames and passwords.
 	 		// No longer need to get them from the config.
 	 		//
-	 		foreach($this->users->get_users_new() AS $row) 
-	 		{
-	 			if(strtolower(trim($row['Email'])) == strtolower(trim($username)))
-	 				if(trim($row['Password']) == md5(trim($password))) {
-	 					$this->config->set_item('rest_loginid', $row['Id']);
-	 					return TRUE;
+	 		if($user = $this->users_model->get_by_email(strtolower(trim($username)))) {
+				if(strtolower(trim($user['UsersEmail'])) == strtolower(trim($username))) {
+	 				if(trim($user['UsersPassword']) == md5(trim($password))) {
+	 					$this->config->set_item('rest_loginid', $user['UsersId']);
+	 					return TRUE;	 			
 	 				}
+				}
 	 		}
-	 		
+	 			 		
 	 		return FALSE;
-		
-		//$valid_logins =& $this->config->item('rest_valid_logins');
-		//if(!array_key_exists($username, $valid_logins))
-		//{
-		//	return FALSE;
-		//}
-		
-		// If actually NULL (not empty string) then do not check it
-		//if($password !== NULL)
-		//{
-		//	if($valid_logins[$username] != $password)
-		//	{
-		//		return FALSE;
-		//	}
-		//}
     }
     
     private function _prepareBasicAuth()

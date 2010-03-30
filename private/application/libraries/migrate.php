@@ -244,8 +244,8 @@ class Migrate
 	 */
 	function _update_schema_version($schema_version) 
 	{
-		$data = array('Config_Data' => $schema_version, 'Config_Last_Update' => date("Y-m-d g:i:s"));
-		$this->CI->db->where('Config_Name', 'migrationversion');
+		$data = array('ConfigData' => $schema_version, 'ConfigLastUpdate' => date("Y-m-d g:i:s"));
+		$this->CI->db->where('ConfigName', 'migrationversion');
 		$this->CI->db->update('Config', $data); 		
 		return 1;
 	}
