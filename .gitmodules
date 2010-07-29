@@ -1,0 +1,3 @@
+[submodule "private/application/helpers/jquery-ui-helpers"]
+	path = private/application/helpers/jquery-ui-helpers
+	url = git@github.com:cloudmanic/Codeignitor-Jquery-Ui-Widget-Helper.git
